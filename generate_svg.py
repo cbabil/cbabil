@@ -10,39 +10,59 @@ from urllib.request import Request, urlopen
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 USERNAME = "cbabil"
 
-# Colors
+# Neofetch-style colors
 COLORS = {
     "dark": {
-        "bg": "#0d1117",
+        "bg": "#161b22",
         "fg": "#c9d1d9",
-        "accent": "#70a5fd",
-        "secondary": "#8b949e",
-        "purple": "#bf91f3",
+        "key": "#ffa657",      # Orange for keys
+        "value": "#a5d6ff",    # Light blue for values
+        "comment": "#6e7681",  # Gray for comments/dots
+        "title": "#58a6ff",    # Blue for title
         "green": "#3fb950",
         "yellow": "#d29922",
         "red": "#f85149",
+        "cyan": "#39c5cf",
+        "purple": "#bc8cff",
+        "white": "#ffffff",
     },
     "light": {
         "bg": "#ffffff",
         "fg": "#24292f",
-        "accent": "#0969da",
-        "secondary": "#57606a",
-        "purple": "#8250df",
+        "key": "#953800",
+        "value": "#0550ae",
+        "comment": "#6e7681",
+        "title": "#0969da",
         "green": "#1a7f37",
         "yellow": "#9a6700",
         "red": "#cf222e",
+        "cyan": "#1b7c83",
+        "purple": "#8250df",
+        "white": "#24292f",
     },
 }
 
-# ASCII art
-ASCII_ART = r"""
-   _____ ____  ____ _____ _____ _
-  / ____/ __ \|  _ \_   _|  __ \ |
- | |   | |  | | |_) || | | |__) | |
- | |   | |  | |  _ < | | |  ___/| |
- | |___| |__| | |_) || |_| |    | |____
-  \_____\____/|____/_____|_|    |______|
-"""
+# GitHub Octocat ASCII art
+ASCII_ART = [
+    "                                     ",
+    "              ████████               ",
+    "          ████▒▒▒▒▒▒▒▒████           ",
+    "        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██         ",
+    "      ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██       ",
+    "    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██     ",
+    "    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██     ",
+    "  ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██   ",
+    "  ██▒▒▒▒▒▒▒▒████▒▒▒▒████▒▒▒▒▒▒▒▒██   ",
+    "  ██▒▒▒▒▒▒▒▒████▒▒▒▒████▒▒▒▒▒▒▒▒██   ",
+    "  ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██   ",
+    "  ██▒▒▒▒▒▒▒▒▒▒▒▒████▒▒▒▒▒▒▒▒▒▒▒▒██   ",
+    "    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██     ",
+    "    ██▒▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒██▒▒▒▒██     ",
+    "      ██▒▒▒▒████████████▒▒▒▒██       ",
+    "        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██         ",
+    "          ████▒▒▒▒▒▒▒▒████           ",
+    "              ████████               ",
+]
 
 
 def graphql_query(query: str) -> dict:
@@ -100,6 +120,7 @@ def get_user_stats() -> dict:
     age = now - created_at
     years = age.days // 365
     months = (age.days % 365) // 30
+    days = age.days
 
     # Calculate total stars
     repos = user.get("repositories", {}).get("nodes", [])
@@ -138,7 +159,7 @@ def get_user_stats() -> dict:
     return {
         "name": user.get("name") or user.get("login", USERNAME),
         "login": user.get("login", USERNAME),
-        "uptime": f"{years}y {months}m" if years > 0 else f"{months}m",
+        "uptime": f"{days} days ({years}y {months}m)",
         "repos": user.get("repositories", {}).get("totalCount", 0),
         "followers": user.get("followers", {}).get("totalCount", 0),
         "stars": total_stars,
@@ -148,78 +169,82 @@ def get_user_stats() -> dict:
 
 
 def generate_svg(stats: dict, mode: str = "dark") -> str:
-    """Generate SVG content."""
-    colors = COLORS[mode]
+    """Generate neofetch-style SVG content."""
+    c = COLORS[mode]
 
-    # Build language bars
-    lang_bars = ""
-    for i, lang in enumerate(stats["languages"]):
-        bar_width = int(lang["percent"] * 1.5)  # Scale to fit
-        y_pos = 195 + (i * 22)
-        lang_bars += f"""
-    <text x="230" y="{y_pos}" fill="{colors['secondary']}" font-size="12">{lang['name']}</text>
-    <rect x="320" y="{y_pos - 10}" width="{bar_width}" height="12" fill="{lang['color']}" rx="2"/>
-    <text x="{325 + bar_width}" y="{y_pos}" fill="{colors['secondary']}" font-size="11">{lang['percent']}%</text>
-"""
+    # Build ASCII art lines
+    ascii_lines = ""
+    for i, line in enumerate(ASCII_ART):
+        y = 45 + (i * 16)
+        # Escape special characters for SVG
+        escaped = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        ascii_lines += f'    <tspan x="20" y="{y}">{escaped}</tspan>\n'
 
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="600" height="340" viewBox="0 0 600 340">
+    # Format languages as comma-separated list
+    lang_list = ", ".join([f"{l['name']} ({l['percent']}%)" for l in stats["languages"][:4]])
+
+    # Create info lines with dots for alignment (neofetch style)
+    def info_line(key: str, value: str, dots: int = 20) -> str:
+        dot_count = dots - len(key)
+        dots_str = "." * max(dot_count, 2)
+        return f'<tspan fill="{c["key"]}">{key}</tspan><tspan fill="{c["comment"]}">{dots_str}</tspan><tspan fill="{c["value"]}">{value}</tspan>'
+
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="850" height="380" viewBox="0 0 850 380">
   <style>
-    .mono {{ font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace; }}
-    .ascii {{ font-family: monospace; font-size: 10px; white-space: pre; }}
+    text {{
+      font-family: 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 14px;
+      white-space: pre;
+    }}
   </style>
 
   <!-- Background -->
-  <rect width="600" height="340" fill="{colors['bg']}" rx="10"/>
+  <rect width="850" height="380" fill="{c['bg']}"/>
 
-  <!-- Terminal header -->
-  <rect width="600" height="30" fill="{colors['bg']}" rx="10"/>
-  <circle cx="20" cy="15" r="6" fill="{colors['red']}"/>
-  <circle cx="40" cy="15" r="6" fill="{colors['yellow']}"/>
-  <circle cx="60" cy="15" r="6" fill="{colors['green']}"/>
-  <text x="300" y="20" text-anchor="middle" fill="{colors['secondary']}" class="mono" font-size="12">cbabil@github</text>
+  <!-- ASCII Art (Octocat) -->
+  <text fill="{c['title']}">
+{ascii_lines}  </text>
 
-  <!-- ASCII Art -->
-  <text x="20" y="55" fill="{colors['accent']}" class="ascii">
-    <tspan x="20" dy="0">   _____ ____  ____ _____ _____ _</tspan>
-    <tspan x="20" dy="12">  / ____| __ )|  _ \\_   _|  __ \\ |</tspan>
-    <tspan x="20" dy="12"> | |   |  _ \\| |_) || | | |__) | |</tspan>
-    <tspan x="20" dy="12"> | |   | |_) |  _ &lt; | | |  ___/| |</tspan>
-    <tspan x="20" dy="12"> | |___| |__/| |_) || |_| |    | |____</tspan>
-    <tspan x="20" dy="12">  \\_____\\____/|____/_____|_|    |______|</tspan>
-  </text>
+  <!-- User title -->
+  <text x="340" y="45" fill="{c['title']}" font-weight="bold">{stats['login']}@github</text>
+  <text x="340" y="61" fill="{c['comment']}">─────────────────────────────────</text>
 
-  <!-- User info -->
-  <text x="230" y="55" fill="{colors['accent']}" class="mono" font-size="14" font-weight="bold">{stats['login']}@github</text>
-  <line x1="230" y1="62" x2="400" y2="62" stroke="{colors['secondary']}" stroke-width="1"/>
+  <!-- System info -->
+  <text x="340" y="85">{info_line("OS", "GitHub")}</text>
+  <text x="340" y="105">{info_line("Host", "github.com/" + stats['login'])}</text>
+  <text x="340" y="125">{info_line("Uptime", stats['uptime'])}</text>
+  <text x="340" y="145">{info_line("Repos", str(stats['repos']))}</text>
+  <text x="340" y="165">{info_line("Commits", str(stats['commits']))}</text>
+  <text x="340" y="185">{info_line("Stars", str(stats['stars']))}</text>
+  <text x="340" y="205">{info_line("Followers", str(stats['followers']))}</text>
 
-  <text x="230" y="82" fill="{colors['purple']}" class="mono" font-size="12">name</text>
-  <text x="290" y="82" fill="{colors['fg']}" class="mono" font-size="12">{stats['name']}</text>
+  <!-- Languages -->
+  <text x="340" y="235" fill="{c['comment']}">─────────────────────────────────</text>
+  <text x="340" y="255">{info_line("Languages", lang_list)}</text>
 
-  <text x="230" y="102" fill="{colors['purple']}" class="mono" font-size="12">uptime</text>
-  <text x="290" y="102" fill="{colors['fg']}" class="mono" font-size="12">{stats['uptime']}</text>
+  <!-- Color blocks (terminal palette) -->
+  <text x="340" y="285" fill="{c['comment']}">─────────────────────────────────</text>
+  <rect x="340" y="295" width="30" height="20" fill="#24292f"/>
+  <rect x="375" y="295" width="30" height="20" fill="{c['red']}"/>
+  <rect x="410" y="295" width="30" height="20" fill="{c['green']}"/>
+  <rect x="445" y="295" width="30" height="20" fill="{c['yellow']}"/>
+  <rect x="480" y="295" width="30" height="20" fill="{c['title']}"/>
+  <rect x="515" y="295" width="30" height="20" fill="{c['purple']}"/>
+  <rect x="550" y="295" width="30" height="20" fill="{c['cyan']}"/>
+  <rect x="585" y="295" width="30" height="20" fill="{c['white']}"/>
 
-  <text x="230" y="122" fill="{colors['purple']}" class="mono" font-size="12">repos</text>
-  <text x="290" y="122" fill="{colors['fg']}" class="mono" font-size="12">{stats['repos']}</text>
-
-  <text x="230" y="142" fill="{colors['purple']}" class="mono" font-size="12">commits</text>
-  <text x="290" y="142" fill="{colors['fg']}" class="mono" font-size="12">{stats['commits']}</text>
-
-  <text x="370" y="82" fill="{colors['purple']}" class="mono" font-size="12">stars</text>
-  <text x="430" y="82" fill="{colors['fg']}" class="mono" font-size="12">{stats['stars']}</text>
-
-  <text x="370" y="102" fill="{colors['purple']}" class="mono" font-size="12">followers</text>
-  <text x="430" y="102" fill="{colors['fg']}" class="mono" font-size="12">{stats['followers']}</text>
-
-  <!-- Languages section -->
-  <text x="230" y="172" fill="{colors['accent']}" class="mono" font-size="12" font-weight="bold">languages</text>
-  <line x1="230" y1="179" x2="400" y2="179" stroke="{colors['secondary']}" stroke-width="1"/>
-
-{lang_bars}
+  <rect x="340" y="320" width="30" height="20" fill="#6e7681"/>
+  <rect x="375" y="320" width="30" height="20" fill="#ff7b72"/>
+  <rect x="410" y="320" width="30" height="20" fill="#7ee787"/>
+  <rect x="445" y="320" width="30" height="20" fill="#ffa657"/>
+  <rect x="480" y="320" width="30" height="20" fill="#79c0ff"/>
+  <rect x="515" y="320" width="30" height="20" fill="#d2a8ff"/>
+  <rect x="550" y="320" width="30" height="20" fill="#a5d6ff"/>
+  <rect x="585" y="320" width="30" height="20" fill="#f0f6fc"/>
 
   <!-- Footer -->
-  <text x="20" y="320" fill="{colors['secondary']}" class="mono" font-size="10">Building developer tools | Open source enthusiast</text>
-  <text x="580" y="320" text-anchor="end" fill="{colors['secondary']}" class="mono" font-size="10">Updated: {datetime.datetime.now().strftime('%Y-%m-%d')}</text>
-</svg>"""
+  <text x="700" y="365" fill="{c['comment']}" font-size="11">Updated: {datetime.datetime.now().strftime('%Y-%m-%d')}</text>
+</svg>'''
 
     return svg
 
