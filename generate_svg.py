@@ -76,13 +76,13 @@ def get_user_stats() -> dict:
         following {
           totalCount
         }
-        pullRequests {
+        pullRequests(first: 1) {
           totalCount
         }
-        issues {
+        issues(first: 1) {
           totalCount
         }
-        gists {
+        gists(first: 1) {
           totalCount
         }
         contributionsCollection {
