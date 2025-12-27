@@ -41,33 +41,33 @@
 
   <!-- Title -->
   <text x="340" y="30" class="title">cbabil@github</text>
-  <text x="340" y="48" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="48" class="dot">───────────────────────────────────────────────────────</text>
 
   <!-- System Info -->
-  <text x="340" y="75"><tspan class="key">OS</tspan><tspan class="dot">:</tspan><tspan class="dot">...................................</tspan><tspan class="val">GitHub</tspan></text>
-  <text x="340" y="95"><tspan class="key">Host</tspan><tspan class="dot">:</tspan><tspan class="dot">......................</tspan><tspan class="val">github.com/cbabil</tspan></text>
-  <text x="340" y="115"><tspan class="key">Uptime</tspan><tspan class="dot">:</tspan><tspan class="dot">..........</tspan><tspan class="val">12 years, 2 months, 28 days</tspan></text>
+  <text x="340" y="75"><tspan class="key">OS</tspan><tspan class="dot">:</tspan><tspan class="dot">.............................................</tspan><tspan class="val">GitHub</tspan></text>
+  <text x="340" y="95"><tspan class="key">Host</tspan><tspan class="dot">:</tspan><tspan class="dot">................................</tspan><tspan class="val">github.com/cbabil</tspan></text>
+  <text x="340" y="115"><tspan class="key">Uptime</tspan><tspan class="dot">:</tspan><tspan class="dot">....................</tspan><tspan class="val">12 years, 2 months, 28 days</tspan></text>
 
-  <text x="340" y="145" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="145" class="dot">───────────────────────────────────────────────────────</text>
 
   <!-- Languages -->
-  <text x="340" y="170"><tspan class="key">Languages.Code</tspan><tspan class="dot">:</tspan><tspan class="dot"></tspan><tspan class="val">TypeScript, Python, CSS, JavaScript</tspan></text>
-  <text x="340" y="190"><tspan class="key">Languages.Frameworks</tspan><tspan class="dot">:</tspan><tspan class="dot"></tspan><tspan class="val">React, Electron, Tailwind</tspan></text>
-  <text x="340" y="210"><tspan class="key">Languages.Tools</tspan><tspan class="dot">:</tspan><tspan class="dot">...........</tspan><tspan class="val">Vite, Vitest, Git</tspan></text>
+  <text x="340" y="170"><tspan class="key">Languages.Code</tspan><tspan class="dot">:</tspan><tspan class="dot">....</tspan><tspan class="val">TypeScript, Python, CSS, JavaScript</tspan></text>
+  <text x="340" y="190"><tspan class="key">Languages.Frameworks</tspan><tspan class="dot">:</tspan><tspan class="dot">........</tspan><tspan class="val">React, Electron, Tailwind</tspan></text>
+  <text x="340" y="210"><tspan class="key">Languages.Tools</tspan><tspan class="dot">:</tspan><tspan class="dot">.....................</tspan><tspan class="val">Vite, Vitest, Git</tspan></text>
 
-  <text x="340" y="240" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="240" class="dot">───────────────────────────────────────────────────────</text>
 
   <!-- Focus -->
-  <text x="340" y="265"><tspan class="key">Focus.Current</tspan><tspan class="dot">:</tspan><tspan class="dot">....................</tspan><tspan class="val">ProjectHub</tspan></text>
-  <text x="340" y="285"><tspan class="key">Focus.Areas</tspan><tspan class="dot">:</tspan><tspan class="dot">...</tspan><tspan class="val">Developer Tools, UI Libraries</tspan></text>
-  <text x="340" y="305"><tspan class="key">Philosophy</tspan><tspan class="dot">:</tspan><tspan class="dot">.........</tspan><tspan class="val">Ship fast, iterate often</tspan></text>
+  <text x="340" y="265"><tspan class="key">Focus.Current</tspan><tspan class="dot">:</tspan><tspan class="dot">..............................</tspan><tspan class="val">ProjectHub</tspan></text>
+  <text x="340" y="285"><tspan class="key">Focus.Areas</tspan><tspan class="dot">:</tspan><tspan class="dot">.............</tspan><tspan class="val">Developer Tools, UI Libraries</tspan></text>
+  <text x="340" y="305"><tspan class="key">Philosophy</tspan><tspan class="dot">:</tspan><tspan class="dot">...................</tspan><tspan class="val">Ship fast, iterate often</tspan></text>
 
-  <text x="340" y="335" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="335" class="dot">───────────────────────────────────────────────────────</text>
 
   <!-- GitHub Stats -->
-  <text x="340" y="360"><tspan class="key">Repos</tspan><tspan class="dot">:</tspan><tspan class="dot">....................................</tspan><tspan class="val">14</tspan></text>
-  <text x="340" y="380"><tspan class="key">Commits</tspan><tspan class="dot">:</tspan><tspan class="dot">.................................</tspan><tspan class="val">330</tspan></text>
-  <text x="340" y="400"><tspan class="key">Stars</tspan><tspan class="dot">:</tspan><tspan class="dot">.....................................</tspan><tspan class="val">1</tspan></text>
-  <text x="340" y="420"><tspan class="key">Followers</tspan><tspan class="dot">:</tspan><tspan class="dot">.................................</tspan><tspan class="val">1</tspan></text>
+  <text x="340" y="360"><tspan class="key">Repos</tspan><tspan class="dot">:</tspan><tspan class="dot">..............................................</tspan><tspan class="val">14</tspan></text>
+  <text x="340" y="380"><tspan class="key">Commits</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">332</tspan></text>
+  <text x="340" y="400"><tspan class="key">Stars</tspan><tspan class="dot">:</tspan><tspan class="dot">...............................................</tspan><tspan class="val">1</tspan></text>
+  <text x="340" y="420"><tspan class="key">Followers</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">1</tspan></text>
 
 </svg>
