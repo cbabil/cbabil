@@ -10,58 +10,30 @@ from urllib.request import Request, urlopen
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 USERNAME = "cbabil"
 
-# Neofetch-style colors
-COLORS = {
-    "dark": {
-        "bg": "#161b22",
-        "fg": "#c9d1d9",
-        "key": "#ffa657",      # Orange for keys
-        "value": "#a5d6ff",    # Light blue for values
-        "comment": "#6e7681",  # Gray for comments/dots
-        "title": "#58a6ff",    # Blue for title
-        "green": "#3fb950",
-        "yellow": "#d29922",
-        "red": "#f85149",
-        "cyan": "#39c5cf",
-        "purple": "#bc8cff",
-        "white": "#ffffff",
-    },
-    "light": {
-        "bg": "#ffffff",
-        "fg": "#24292f",
-        "key": "#953800",
-        "value": "#0550ae",
-        "comment": "#6e7681",
-        "title": "#0969da",
-        "green": "#1a7f37",
-        "yellow": "#9a6700",
-        "red": "#cf222e",
-        "cyan": "#1b7c83",
-        "purple": "#8250df",
-        "white": "#24292f",
-    },
-}
-
-# GitHub Octocat ASCII art
+# Dragon ASCII art (based on avatar)
 ASCII_ART = [
-    "                                     ",
-    "              ████████               ",
-    "          ████▒▒▒▒▒▒▒▒████           ",
-    "        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██         ",
-    "      ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██       ",
-    "    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██     ",
-    "    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██     ",
-    "  ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██   ",
-    "  ██▒▒▒▒▒▒▒▒████▒▒▒▒████▒▒▒▒▒▒▒▒██   ",
-    "  ██▒▒▒▒▒▒▒▒████▒▒▒▒████▒▒▒▒▒▒▒▒██   ",
-    "  ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██   ",
-    "  ██▒▒▒▒▒▒▒▒▒▒▒▒████▒▒▒▒▒▒▒▒▒▒▒▒██   ",
-    "    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██     ",
-    "    ██▒▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒██▒▒▒▒██     ",
-    "      ██▒▒▒▒████████████▒▒▒▒██       ",
-    "        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██         ",
-    "          ████▒▒▒▒▒▒▒▒████           ",
-    "              ████████               ",
+    "                                                  ",
+    "                    @@@@@@@@@@                    ",
+    "                 @@@          @@@                 ",
+    "               @@    @@@@@@@@    @@               ",
+    "              @   @@@@@@@@@@@@@@   @              ",
+    "             @  @@@@@@@@@@@@@@@@@@  @             ",
+    "            @  @@@@@@@@@@@@@@@@@@@@  @            ",
+    "           @  @@@@@@@@@@@@@@@@@@@@@@  @           ",
+    "          @  @@@@@@  @@@@@@  @@@@@@@@  @          ",
+    "          @ @@@@@@@  @@@@@@  @@@@@@@@ @           ",
+    "         @  @@@@@@@@@@@@@@@@@@@@@@@@@@  @         ",
+    "         @  @@@@@@@@@@    @@@@@@@@@@@@  @         ",
+    "         @  @@@@@@@@@      @@@@@@@@@@@  @         ",
+    "          @ @@@@@@@@@@@@@@@@@@@@@@@@@ @           ",
+    "          @  @@@@@@@@@@@@@@@@@@@@@@@  @           ",
+    "           @  @@@@@ @@@@@@@@@@ @@@@@  @           ",
+    "            @  @@@   @@@@@@@@   @@@  @            ",
+    "             @   @    @@@@@@    @   @             ",
+    "              @@                  @@              ",
+    "                @@@            @@@                ",
+    "                   @@@@@@@@@@@@                   ",
+    "                                                  ",
 ]
 
 
@@ -120,7 +92,7 @@ def get_user_stats() -> dict:
     age = now - created_at
     years = age.days // 365
     months = (age.days % 365) // 30
-    days = age.days
+    days = (age.days % 365) % 30
 
     # Calculate total stars
     repos = user.get("repositories", {}).get("nodes", [])
@@ -159,7 +131,7 @@ def get_user_stats() -> dict:
     return {
         "name": user.get("name") or user.get("login", USERNAME),
         "login": user.get("login", USERNAME),
-        "uptime": f"{days} days ({years}y {months}m)",
+        "uptime": f"{years} years, {months} months, {days} days",
         "repos": user.get("repositories", {}).get("totalCount", 0),
         "followers": user.get("followers", {}).get("totalCount", 0),
         "stars": total_stars,
@@ -170,80 +142,107 @@ def get_user_stats() -> dict:
 
 def generate_svg(stats: dict, mode: str = "dark") -> str:
     """Generate neofetch-style SVG content."""
-    c = COLORS[mode]
 
-    # Build ASCII art lines
+    if mode == "dark":
+        bg = "#161b22"
+        title_color = "#58a6ff"
+        key_color = "#ffa657"
+        value_color = "#a5d6ff"
+        comment_color = "#6e7681"
+        ascii_color = "#58a6ff"
+    else:
+        bg = "#ffffff"
+        title_color = "#0969da"
+        key_color = "#953800"
+        value_color = "#0550ae"
+        comment_color = "#6e7681"
+        ascii_color = "#0969da"
+
+    # Build ASCII art
     ascii_lines = ""
     for i, line in enumerate(ASCII_ART):
-        y = 45 + (i * 16)
-        # Escape special characters for SVG
-        escaped = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-        ascii_lines += f'    <tspan x="20" y="{y}">{escaped}</tspan>\n'
+        y = 30 + (i * 18)
+        ascii_lines += f'    <tspan x="20" y="{y}">{line}</tspan>\n'
 
-    # Format languages as comma-separated list
-    lang_list = ", ".join([f"{l['name']} ({l['percent']}%)" for l in stats["languages"][:4]])
+    # Format languages
+    lang_str = ", ".join([l["name"] for l in stats["languages"][:4]])
 
-    # Create info lines with dots for alignment (neofetch style)
-    def info_line(key: str, value: str, dots: int = 20) -> str:
-        dot_count = dots - len(key)
-        dots_str = "." * max(dot_count, 2)
-        return f'<tspan fill="{c["key"]}">{key}</tspan><tspan fill="{c["comment"]}">{dots_str}</tspan><tspan fill="{c["value"]}">{value}</tspan>'
+    # Create dotted lines (neofetch style)
+    def make_line(key: str, value: str, total_width: int = 45) -> str:
+        dots = "." * (total_width - len(key) - len(str(value)) - 2)
+        return f'<tspan class="key">{key}</tspan><tspan class="dot">:</tspan><tspan class="dot">{dots}</tspan><tspan class="val">{value}</tspan>'
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="850" height="380" viewBox="0 0 850 380">
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="850" height="480" viewBox="0 0 850 480">
   <style>
     text {{
       font-family: 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
       font-size: 14px;
       white-space: pre;
     }}
+    .title {{ fill: {title_color}; font-weight: bold; }}
+    .key {{ fill: {key_color}; }}
+    .val {{ fill: {value_color}; }}
+    .dot {{ fill: {comment_color}; }}
+    .ascii {{ fill: {ascii_color}; font-size: 12px; }}
   </style>
 
   <!-- Background -->
-  <rect width="850" height="380" fill="{c['bg']}"/>
+  <rect width="850" height="480" fill="{bg}"/>
 
-  <!-- ASCII Art (Octocat) -->
-  <text fill="{c['title']}">
+  <!-- ASCII Art -->
+  <text class="ascii">
 {ascii_lines}  </text>
 
-  <!-- User title -->
-  <text x="340" y="45" fill="{c['title']}" font-weight="bold">{stats['login']}@github</text>
-  <text x="340" y="61" fill="{c['comment']}">─────────────────────────────────</text>
+  <!-- Title -->
+  <text x="420" y="30" class="title">{stats['login']}@github</text>
+  <text x="420" y="48" class="dot">───────────────────────────────────────────</text>
 
-  <!-- System info -->
-  <text x="340" y="85">{info_line("OS", "GitHub")}</text>
-  <text x="340" y="105">{info_line("Host", "github.com/" + stats['login'])}</text>
-  <text x="340" y="125">{info_line("Uptime", stats['uptime'])}</text>
-  <text x="340" y="145">{info_line("Repos", str(stats['repos']))}</text>
-  <text x="340" y="165">{info_line("Commits", str(stats['commits']))}</text>
-  <text x="340" y="185">{info_line("Stars", str(stats['stars']))}</text>
-  <text x="340" y="205">{info_line("Followers", str(stats['followers']))}</text>
+  <!-- System Info -->
+  <text x="420" y="75">{make_line("OS", "GitHub")}</text>
+  <text x="420" y="95">{make_line("Host", "github.com/" + stats['login'])}</text>
+  <text x="420" y="115">{make_line("Uptime", stats['uptime'])}</text>
+
+  <text x="420" y="145" class="dot">───────────────────────────────────────────</text>
 
   <!-- Languages -->
-  <text x="340" y="235" fill="{c['comment']}">─────────────────────────────────</text>
-  <text x="340" y="255">{info_line("Languages", lang_list)}</text>
+  <text x="420" y="170">{make_line("Languages.Code", lang_str)}</text>
+  <text x="420" y="190">{make_line("Languages.Frameworks", "React, Electron, Tailwind")}</text>
+  <text x="420" y="210">{make_line("Languages.Tools", "Vite, Vitest, Git")}</text>
 
-  <!-- Color blocks (terminal palette) -->
-  <text x="340" y="285" fill="{c['comment']}">─────────────────────────────────</text>
-  <rect x="340" y="295" width="30" height="20" fill="#24292f"/>
-  <rect x="375" y="295" width="30" height="20" fill="{c['red']}"/>
-  <rect x="410" y="295" width="30" height="20" fill="{c['green']}"/>
-  <rect x="445" y="295" width="30" height="20" fill="{c['yellow']}"/>
-  <rect x="480" y="295" width="30" height="20" fill="{c['title']}"/>
-  <rect x="515" y="295" width="30" height="20" fill="{c['purple']}"/>
-  <rect x="550" y="295" width="30" height="20" fill="{c['cyan']}"/>
-  <rect x="585" y="295" width="30" height="20" fill="{c['white']}"/>
+  <text x="420" y="240" class="dot">───────────────────────────────────────────</text>
 
-  <rect x="340" y="320" width="30" height="20" fill="#6e7681"/>
-  <rect x="375" y="320" width="30" height="20" fill="#ff7b72"/>
-  <rect x="410" y="320" width="30" height="20" fill="#7ee787"/>
-  <rect x="445" y="320" width="30" height="20" fill="#ffa657"/>
-  <rect x="480" y="320" width="30" height="20" fill="#79c0ff"/>
-  <rect x="515" y="320" width="30" height="20" fill="#d2a8ff"/>
-  <rect x="550" y="320" width="30" height="20" fill="#a5d6ff"/>
-  <rect x="585" y="320" width="30" height="20" fill="#f0f6fc"/>
+  <!-- Focus -->
+  <text x="420" y="265">{make_line("Focus.Current", "ProjectHub")}</text>
+  <text x="420" y="285">{make_line("Focus.Areas", "Developer Tools, UI Libraries")}</text>
+  <text x="420" y="305">{make_line("Philosophy", "Ship fast, iterate often")}</text>
 
-  <!-- Footer -->
-  <text x="700" y="365" fill="{c['comment']}" font-size="11">Updated: {datetime.datetime.now().strftime('%Y-%m-%d')}</text>
+  <text x="420" y="335" class="dot">───────────────────────────────────────────</text>
+
+  <!-- GitHub Stats -->
+  <text x="420" y="360">{make_line("Repos", str(stats['repos']))}</text>
+  <text x="420" y="380">{make_line("Commits", str(stats['commits']))}</text>
+  <text x="420" y="400">{make_line("Stars", str(stats['stars']))}</text>
+  <text x="420" y="420">{make_line("Followers", str(stats['followers']))}</text>
+
+  <!-- Color palette -->
+  <rect x="420" y="440" width="25" height="15" fill="#24292f"/>
+  <rect x="450" y="440" width="25" height="15" fill="#f85149"/>
+  <rect x="480" y="440" width="25" height="15" fill="#3fb950"/>
+  <rect x="510" y="440" width="25" height="15" fill="#d29922"/>
+  <rect x="540" y="440" width="25" height="15" fill="#58a6ff"/>
+  <rect x="570" y="440" width="25" height="15" fill="#bc8cff"/>
+  <rect x="600" y="440" width="25" height="15" fill="#39c5cf"/>
+  <rect x="630" y="440" width="25" height="15" fill="#ffffff"/>
+
+  <rect x="420" y="458" width="25" height="15" fill="#6e7681"/>
+  <rect x="450" y="458" width="25" height="15" fill="#ff7b72"/>
+  <rect x="480" y="458" width="25" height="15" fill="#7ee787"/>
+  <rect x="510" y="458" width="25" height="15" fill="#ffa657"/>
+  <rect x="540" y="458" width="25" height="15" fill="#79c0ff"/>
+  <rect x="570" y="458" width="25" height="15" fill="#d2a8ff"/>
+  <rect x="600" y="458" width="25" height="15" fill="#a5d6ff"/>
+  <rect x="630" y="458" width="25" height="15" fill="#f0f6fc"/>
+
 </svg>'''
 
     return svg
