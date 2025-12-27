@@ -170,7 +170,7 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
         dots = "." * (total_width - len(key) - len(str(value)) - 2)
         return f'<tspan class="key">{key}</tspan><tspan class="dot">:</tspan><tspan class="dot">{dots}</tspan><tspan class="val">{value}</tspan>'
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="850" height="440" viewBox="0 0 850 440">
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
   <style>
     text {{
       font-family: 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -185,42 +185,42 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
   </style>
 
   <!-- Background -->
-  <rect width="850" height="440" fill="{bg}"/>
+  <rect width="800" height="440" fill="{bg}"/>
 
   <!-- ASCII Art -->
   <text class="ascii">
 {ascii_lines}  </text>
 
   <!-- Title -->
-  <text x="420" y="30" class="title">{stats['login']}@github</text>
-  <text x="420" y="48" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="30" class="title">{stats['login']}@github</text>
+  <text x="340" y="48" class="dot">───────────────────────────────────────────</text>
 
   <!-- System Info -->
-  <text x="420" y="75">{make_line("OS", "GitHub")}</text>
-  <text x="420" y="95">{make_line("Host", "github.com/" + stats['login'])}</text>
-  <text x="420" y="115">{make_line("Uptime", stats['uptime'])}</text>
+  <text x="340" y="75">{make_line("OS", "GitHub")}</text>
+  <text x="340" y="95">{make_line("Host", "github.com/" + stats['login'])}</text>
+  <text x="340" y="115">{make_line("Uptime", stats['uptime'])}</text>
 
-  <text x="420" y="145" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="145" class="dot">───────────────────────────────────────────</text>
 
   <!-- Languages -->
-  <text x="420" y="170">{make_line("Languages.Code", lang_str)}</text>
-  <text x="420" y="190">{make_line("Languages.Frameworks", "React, Electron, Tailwind")}</text>
-  <text x="420" y="210">{make_line("Languages.Tools", "Vite, Vitest, Git")}</text>
+  <text x="340" y="170">{make_line("Languages.Code", lang_str)}</text>
+  <text x="340" y="190">{make_line("Languages.Frameworks", "React, Electron, Tailwind")}</text>
+  <text x="340" y="210">{make_line("Languages.Tools", "Vite, Vitest, Git")}</text>
 
-  <text x="420" y="240" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="240" class="dot">───────────────────────────────────────────</text>
 
   <!-- Focus -->
-  <text x="420" y="265">{make_line("Focus.Current", "ProjectHub")}</text>
-  <text x="420" y="285">{make_line("Focus.Areas", "Developer Tools, UI Libraries")}</text>
-  <text x="420" y="305">{make_line("Philosophy", "Ship fast, iterate often")}</text>
+  <text x="340" y="265">{make_line("Focus.Current", "ProjectHub")}</text>
+  <text x="340" y="285">{make_line("Focus.Areas", "Developer Tools, UI Libraries")}</text>
+  <text x="340" y="305">{make_line("Philosophy", "Ship fast, iterate often")}</text>
 
-  <text x="420" y="335" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="335" class="dot">───────────────────────────────────────────</text>
 
   <!-- GitHub Stats -->
-  <text x="420" y="360">{make_line("Repos", str(stats['repos']))}</text>
-  <text x="420" y="380">{make_line("Commits", str(stats['commits']))}</text>
-  <text x="420" y="400">{make_line("Stars", str(stats['stars']))}</text>
-  <text x="420" y="420">{make_line("Followers", str(stats['followers']))}</text>
+  <text x="340" y="360">{make_line("Repos", str(stats['repos']))}</text>
+  <text x="340" y="380">{make_line("Commits", str(stats['commits']))}</text>
+  <text x="340" y="400">{make_line("Stars", str(stats['stars']))}</text>
+  <text x="340" y="420">{make_line("Followers", str(stats['followers']))}</text>
 
 </svg>'''
 
