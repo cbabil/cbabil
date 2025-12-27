@@ -82,9 +82,6 @@ def get_user_stats() -> dict:
         issues(first: 1) {
           totalCount
         }
-        gists(first: 1) {
-          totalCount
-        }
         contributionsCollection {
           totalCommitContributions
           restrictedContributionsCount
@@ -94,9 +91,6 @@ def get_user_stats() -> dict:
     """ % USERNAME
 
     result = graphql_query(query)
-    print(f"API Result: {result}")
-    if "errors" in result:
-        print(f"GraphQL Errors: {result['errors']}")
     user = result.get("data", {}).get("user", {})
 
     # Calculate account age
@@ -155,7 +149,6 @@ def get_user_stats() -> dict:
         "commits": total_commits,
         "prs": user.get("pullRequests", {}).get("totalCount", 0),
         "issues": user.get("issues", {}).get("totalCount", 0),
-        "gists": user.get("gists", {}).get("totalCount", 0),
         "top_lang": top_lang,
         "languages": languages,
     }
@@ -192,7 +185,7 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
 
     divider = "─" * 55
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="390" viewBox="0 0 800 390">
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="370" viewBox="0 0 800 370">
   <style>
     text {{
       font-family: 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -207,7 +200,7 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
   </style>
 
   <!-- Background -->
-  <rect width="800" height="390" fill="{bg}"/>
+  <rect width="800" height="370" fill="{bg}"/>
 
   <!-- ASCII Art -->
   <text class="ascii">
@@ -235,9 +228,8 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
   <!-- More GitHub Stats -->
   <text x="340" y="285">{make_line("PRs", str(stats['prs']))}</text>
   <text x="340" y="305">{make_line("Issues", str(stats['issues']))}</text>
-  <text x="340" y="325">{make_line("Gists", str(stats['gists']))}</text>
-  <text x="340" y="345">{make_line("Following", str(stats['following']))}</text>
-  <text x="340" y="365">{make_line("Top Lang", stats['top_lang'])}</text>
+  <text x="340" y="325">{make_line("Following", str(stats['following']))}</text>
+  <text x="340" y="345">{make_line("Top Lang", stats['top_lang'])}</text>
 
 </svg>'''
 
