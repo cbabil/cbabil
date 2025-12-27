@@ -1,7 +1,7 @@
 <a href="https://github.com/cbabil">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/cbabil/cbabil/77c089f/dark_mode.svg">
-    <img alt="cbabil's GitHub Profile" src="https://raw.githubusercontent.com/cbabil/cbabil/77c089f/light_mode.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/cbabil/cbabil/aa43f05/dark_mode.svg">
+    <img alt="cbabil's GitHub Profile" src="https://raw.githubusercontent.com/cbabil/cbabil/aa43f05/light_mode.svg">
   </picture>
 </a>
 
