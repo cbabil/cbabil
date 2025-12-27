@@ -32,34 +32,47 @@
   <text x="290" y="82" fill="#c9d1d9" class="mono" font-size="12">cbabil</text>
 
   <text x="230" y="102" fill="#bf91f3" class="mono" font-size="12">uptime</text>
-  <text x="290" y="102" fill="#c9d1d9" class="mono" font-size="12">--</text>
+  <text x="290" y="102" fill="#c9d1d9" class="mono" font-size="12">12y 2m</text>
 
   <text x="230" y="122" fill="#bf91f3" class="mono" font-size="12">repos</text>
-  <text x="290" y="122" fill="#c9d1d9" class="mono" font-size="12">--</text>
+  <text x="290" y="122" fill="#c9d1d9" class="mono" font-size="12">14</text>
 
   <text x="230" y="142" fill="#bf91f3" class="mono" font-size="12">commits</text>
-  <text x="290" y="142" fill="#c9d1d9" class="mono" font-size="12">--</text>
+  <text x="290" y="142" fill="#c9d1d9" class="mono" font-size="12">320</text>
 
   <text x="370" y="82" fill="#bf91f3" class="mono" font-size="12">stars</text>
-  <text x="430" y="82" fill="#c9d1d9" class="mono" font-size="12">--</text>
+  <text x="430" y="82" fill="#c9d1d9" class="mono" font-size="12">1</text>
 
   <text x="370" y="102" fill="#bf91f3" class="mono" font-size="12">followers</text>
-  <text x="430" y="102" fill="#c9d1d9" class="mono" font-size="12">--</text>
+  <text x="430" y="102" fill="#c9d1d9" class="mono" font-size="12">1</text>
 
   <!-- Languages section -->
   <text x="230" y="172" fill="#70a5fd" class="mono" font-size="12" font-weight="bold">languages</text>
   <line x1="230" y1="179" x2="400" y2="179" stroke="#8b949e" stroke-width="1"/>
 
-  <text x="230" y="195" fill="#8b949e" class="mono" font-size="12">TypeScript</text>
-  <rect x="320" y="185" width="60" height="12" fill="#3178c6" rx="2"/>
 
-  <text x="230" y="217" fill="#8b949e" class="mono" font-size="12">Python</text>
-  <rect x="320" y="207" width="30" height="12" fill="#3572A5" rx="2"/>
+    <text x="230" y="195" fill="#8b949e" font-size="12">TypeScript</text>
+    <rect x="320" y="185" width="89" height="12" fill="#3178c6" rx="2"/>
+    <text x="414" y="195" fill="#8b949e" font-size="11">59.9%</text>
 
-  <text x="230" y="239" fill="#8b949e" class="mono" font-size="12">Go</text>
-  <rect x="320" y="229" width="20" height="12" fill="#00ADD8" rx="2"/>
+    <text x="230" y="217" fill="#8b949e" font-size="12">Python</text>
+    <rect x="320" y="207" width="42" height="12" fill="#3572A5" rx="2"/>
+    <text x="367" y="217" fill="#8b949e" font-size="11">28.3%</text>
+
+    <text x="230" y="239" fill="#8b949e" font-size="12">CSS</text>
+    <rect x="320" y="229" width="12" height="12" fill="#663399" rx="2"/>
+    <text x="337" y="239" fill="#8b949e" font-size="11">8.1%</text>
+
+    <text x="230" y="261" fill="#8b949e" font-size="12">JavaScript</text>
+    <rect x="320" y="251" width="3" height="12" fill="#f1e05a" rx="2"/>
+    <text x="328" y="261" fill="#8b949e" font-size="11">2.2%</text>
+
+    <text x="230" y="283" fill="#8b949e" font-size="12">Makefile</text>
+    <rect x="320" y="273" width="2" height="12" fill="#427819" rx="2"/>
+    <text x="327" y="283" fill="#8b949e" font-size="11">1.5%</text>
+
 
   <!-- Footer -->
   <text x="20" y="320" fill="#8b949e" class="mono" font-size="10">Building developer tools | Open source enthusiast</text>
-  <text x="580" y="320" text-anchor="end" fill="#8b949e" class="mono" font-size="10">Run workflow to update</text>
+  <text x="580" y="320" text-anchor="end" fill="#8b949e" class="mono" font-size="10">Updated: 2025-12-27</text>
 </svg>
