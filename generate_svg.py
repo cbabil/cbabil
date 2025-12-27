@@ -185,7 +185,7 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
 
     divider = "─" * 55
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="370" viewBox="0 0 800 370">
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="350" viewBox="0 0 800 350">
   <style>
     text {{
       font-family: 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -200,7 +200,7 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
   </style>
 
   <!-- Background -->
-  <rect width="800" height="370" fill="{bg}"/>
+  <rect width="800" height="350" fill="{bg}"/>
 
   <!-- ASCII Art -->
   <text class="ascii">
@@ -229,7 +229,6 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
   <text x="340" y="285">{make_line("PRs", str(stats['prs']))}</text>
   <text x="340" y="305">{make_line("Issues", str(stats['issues']))}</text>
   <text x="340" y="325">{make_line("Following", str(stats['following']))}</text>
-  <text x="340" y="345">{make_line("Top Lang", stats['top_lang'])}</text>
 
 </svg>'''
 
