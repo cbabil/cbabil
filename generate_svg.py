@@ -73,6 +73,18 @@ def get_user_stats() -> dict:
         followers {
           totalCount
         }
+        following {
+          totalCount
+        }
+        pullRequests {
+          totalCount
+        }
+        issues {
+          totalCount
+        }
+        gists {
+          totalCount
+        }
         contributionsCollection {
           totalCommitContributions
           restrictedContributionsCount
@@ -126,14 +138,22 @@ def get_user_stats() -> dict:
         + contributions.get("restrictedContributionsCount", 0)
     )
 
+    # Get top language
+    top_lang = languages[0]["name"] if languages else "Unknown"
+
     return {
         "name": user.get("name") or user.get("login", USERNAME),
         "login": user.get("login", USERNAME),
         "uptime": f"{years} years, {months} months, {days} days",
         "repos": user.get("repositories", {}).get("totalCount", 0),
         "followers": user.get("followers", {}).get("totalCount", 0),
+        "following": user.get("following", {}).get("totalCount", 0),
         "stars": total_stars,
         "commits": total_commits,
+        "prs": user.get("pullRequests", {}).get("totalCount", 0),
+        "issues": user.get("issues", {}).get("totalCount", 0),
+        "gists": user.get("gists", {}).get("totalCount", 0),
+        "top_lang": top_lang,
         "languages": languages,
     }
 
@@ -162,9 +182,6 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
         y = 30 + (i * 18)
         ascii_lines += f'    <tspan x="20" y="{y}">{line}</tspan>\n'
 
-    # Format languages
-    lang_str = ", ".join([l["name"] for l in stats["languages"][:4]])
-
     # Create dotted lines (neofetch style)
     def make_line(key: str, value: str, total_width: int = 55) -> str:
         dots = "." * (total_width - len(key) - len(str(value)) - 2)
@@ -172,7 +189,7 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
 
     divider = "─" * 55
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="390" viewBox="0 0 800 390">
   <style>
     text {{
       font-family: 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -187,7 +204,7 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
   </style>
 
   <!-- Background -->
-  <rect width="800" height="440" fill="{bg}"/>
+  <rect width="800" height="390" fill="{bg}"/>
 
   <!-- ASCII Art -->
   <text class="ascii">
@@ -204,25 +221,20 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
 
   <text x="340" y="145" class="dot">{divider}</text>
 
-  <!-- Languages -->
-  <text x="340" y="170">{make_line("Languages.Code", lang_str)}</text>
-  <text x="340" y="190">{make_line("Languages.Frameworks", "React, Electron, Tailwind")}</text>
-  <text x="340" y="210">{make_line("Languages.Tools", "Vite, Vitest, Git")}</text>
-
-  <text x="340" y="240" class="dot">{divider}</text>
-
-  <!-- Focus -->
-  <text x="340" y="265">{make_line("Focus.Current", "ProjectHub")}</text>
-  <text x="340" y="285">{make_line("Focus.Areas", "Developer Tools, UI Libraries")}</text>
-  <text x="340" y="305">{make_line("Philosophy", "Ship fast, iterate often")}</text>
-
-  <text x="340" y="335" class="dot">{divider}</text>
-
   <!-- GitHub Stats -->
-  <text x="340" y="360">{make_line("Repos", str(stats['repos']))}</text>
-  <text x="340" y="380">{make_line("Commits", str(stats['commits']))}</text>
-  <text x="340" y="400">{make_line("Stars", str(stats['stars']))}</text>
-  <text x="340" y="420">{make_line("Followers", str(stats['followers']))}</text>
+  <text x="340" y="170">{make_line("Repos", str(stats['repos']))}</text>
+  <text x="340" y="190">{make_line("Commits", str(stats['commits']))}</text>
+  <text x="340" y="210">{make_line("Stars", str(stats['stars']))}</text>
+  <text x="340" y="230">{make_line("Followers", str(stats['followers']))}</text>
+
+  <text x="340" y="260" class="dot">{divider}</text>
+
+  <!-- More GitHub Stats -->
+  <text x="340" y="285">{make_line("PRs", str(stats['prs']))}</text>
+  <text x="340" y="305">{make_line("Issues", str(stats['issues']))}</text>
+  <text x="340" y="325">{make_line("Gists", str(stats['gists']))}</text>
+  <text x="340" y="345">{make_line("Following", str(stats['following']))}</text>
+  <text x="340" y="365">{make_line("Top Lang", stats['top_lang'])}</text>
 
 </svg>'''
 
