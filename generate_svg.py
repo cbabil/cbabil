@@ -94,6 +94,9 @@ def get_user_stats() -> dict:
     """ % USERNAME
 
     result = graphql_query(query)
+    print(f"API Result: {result}")
+    if "errors" in result:
+        print(f"GraphQL Errors: {result['errors']}")
     user = result.get("data", {}).get("user", {})
 
     # Calculate account age
