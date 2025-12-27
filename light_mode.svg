@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="370" viewBox="0 0 800 370">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="350" viewBox="0 0 800 350">
   <style>
     text {
       font-family: 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -13,7 +13,7 @@
   </style>
 
   <!-- Background -->
-  <rect width="800" height="370" fill="#ffffff"/>
+  <rect width="800" height="350" fill="#ffffff"/>
 
   <!-- ASCII Art -->
   <text class="ascii">
@@ -52,7 +52,7 @@
 
   <!-- GitHub Stats -->
   <text x="340" y="170"><tspan class="key">Repos</tspan><tspan class="dot">:</tspan><tspan class="dot">..............................................</tspan><tspan class="val">14</tspan></text>
-  <text x="340" y="190"><tspan class="key">Commits</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">337</tspan></text>
+  <text x="340" y="190"><tspan class="key">Commits</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">339</tspan></text>
   <text x="340" y="210"><tspan class="key">Stars</tspan><tspan class="dot">:</tspan><tspan class="dot">...............................................</tspan><tspan class="val">1</tspan></text>
   <text x="340" y="230"><tspan class="key">Followers</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">1</tspan></text>
 
@@ -62,6 +62,5 @@
   <text x="340" y="285"><tspan class="key">PRs</tspan><tspan class="dot">:</tspan><tspan class="dot">................................................</tspan><tspan class="val">67</tspan></text>
   <text x="340" y="305"><tspan class="key">Issues</tspan><tspan class="dot">:</tspan><tspan class="dot">..............................................</tspan><tspan class="val">2</tspan></text>
   <text x="340" y="325"><tspan class="key">Following</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">2</tspan></text>
-  <text x="340" y="345"><tspan class="key">Top Lang</tspan><tspan class="dot">:</tspan><tspan class="dot">...................................</tspan><tspan class="val">TypeScript</tspan></text>
 
 </svg>
