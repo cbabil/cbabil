@@ -170,7 +170,7 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
         dots = "." * (total_width - len(key) - len(str(value)) - 2)
         return f'<tspan class="key">{key}</tspan><tspan class="dot">:</tspan><tspan class="dot">{dots}</tspan><tspan class="val">{value}</tspan>'
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="850" height="480" viewBox="0 0 850 480">
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="850" height="440" viewBox="0 0 850 440">
   <style>
     text {{
       font-family: 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -185,7 +185,7 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
   </style>
 
   <!-- Background -->
-  <rect width="850" height="480" fill="{bg}"/>
+  <rect width="850" height="440" fill="{bg}"/>
 
   <!-- ASCII Art -->
   <text class="ascii">
@@ -221,25 +221,6 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
   <text x="420" y="380">{make_line("Commits", str(stats['commits']))}</text>
   <text x="420" y="400">{make_line("Stars", str(stats['stars']))}</text>
   <text x="420" y="420">{make_line("Followers", str(stats['followers']))}</text>
-
-  <!-- Color palette -->
-  <rect x="420" y="440" width="25" height="15" fill="#24292f"/>
-  <rect x="450" y="440" width="25" height="15" fill="#f85149"/>
-  <rect x="480" y="440" width="25" height="15" fill="#3fb950"/>
-  <rect x="510" y="440" width="25" height="15" fill="#d29922"/>
-  <rect x="540" y="440" width="25" height="15" fill="#58a6ff"/>
-  <rect x="570" y="440" width="25" height="15" fill="#bc8cff"/>
-  <rect x="600" y="440" width="25" height="15" fill="#39c5cf"/>
-  <rect x="630" y="440" width="25" height="15" fill="#ffffff"/>
-
-  <rect x="420" y="458" width="25" height="15" fill="#6e7681"/>
-  <rect x="450" y="458" width="25" height="15" fill="#ff7b72"/>
-  <rect x="480" y="458" width="25" height="15" fill="#7ee787"/>
-  <rect x="510" y="458" width="25" height="15" fill="#ffa657"/>
-  <rect x="540" y="458" width="25" height="15" fill="#79c0ff"/>
-  <rect x="570" y="458" width="25" height="15" fill="#d2a8ff"/>
-  <rect x="600" y="458" width="25" height="15" fill="#a5d6ff"/>
-  <rect x="630" y="458" width="25" height="15" fill="#f0f6fc"/>
 
 </svg>'''
 
