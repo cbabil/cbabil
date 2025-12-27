@@ -166,9 +166,11 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
     lang_str = ", ".join([l["name"] for l in stats["languages"][:4]])
 
     # Create dotted lines (neofetch style)
-    def make_line(key: str, value: str, total_width: int = 45) -> str:
+    def make_line(key: str, value: str, total_width: int = 55) -> str:
         dots = "." * (total_width - len(key) - len(str(value)) - 2)
         return f'<tspan class="key">{key}</tspan><tspan class="dot">:</tspan><tspan class="dot">{dots}</tspan><tspan class="val">{value}</tspan>'
+
+    divider = "─" * 55
 
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
   <style>
@@ -193,28 +195,28 @@ def generate_svg(stats: dict, mode: str = "dark") -> str:
 
   <!-- Title -->
   <text x="340" y="30" class="title">{stats['login']}@github</text>
-  <text x="340" y="48" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="48" class="dot">{divider}</text>
 
   <!-- System Info -->
   <text x="340" y="75">{make_line("OS", "GitHub")}</text>
   <text x="340" y="95">{make_line("Host", "github.com/" + stats['login'])}</text>
   <text x="340" y="115">{make_line("Uptime", stats['uptime'])}</text>
 
-  <text x="340" y="145" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="145" class="dot">{divider}</text>
 
   <!-- Languages -->
   <text x="340" y="170">{make_line("Languages.Code", lang_str)}</text>
   <text x="340" y="190">{make_line("Languages.Frameworks", "React, Electron, Tailwind")}</text>
   <text x="340" y="210">{make_line("Languages.Tools", "Vite, Vitest, Git")}</text>
 
-  <text x="340" y="240" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="240" class="dot">{divider}</text>
 
   <!-- Focus -->
   <text x="340" y="265">{make_line("Focus.Current", "ProjectHub")}</text>
   <text x="340" y="285">{make_line("Focus.Areas", "Developer Tools, UI Libraries")}</text>
   <text x="340" y="305">{make_line("Philosophy", "Ship fast, iterate often")}</text>
 
-  <text x="340" y="335" class="dot">───────────────────────────────────────────</text>
+  <text x="340" y="335" class="dot">{divider}</text>
 
   <!-- GitHub Stats -->
   <text x="340" y="360">{make_line("Repos", str(stats['repos']))}</text>
