@@ -52,7 +52,7 @@
 
   <!-- GitHub Stats -->
   <text x="340" y="170"><tspan class="key">Repos</tspan><tspan class="dot">:</tspan><tspan class="dot">..............................................</tspan><tspan class="val">14</tspan></text>
-  <text x="340" y="190"><tspan class="key">Commits</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">341</tspan></text>
+  <text x="340" y="190"><tspan class="key">Commits</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">342</tspan></text>
   <text x="340" y="210"><tspan class="key">Stars</tspan><tspan class="dot">:</tspan><tspan class="dot">...............................................</tspan><tspan class="val">1</tspan></text>
   <text x="340" y="230"><tspan class="key">Followers</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">1</tspan></text>
 
