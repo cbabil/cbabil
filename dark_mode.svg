@@ -46,20 +46,20 @@
   <!-- System Info -->
   <text x="340" y="75"><tspan class="key">OS</tspan><tspan class="dot">:</tspan><tspan class="dot">.............................................</tspan><tspan class="val">GitHub</tspan></text>
   <text x="340" y="95"><tspan class="key">Host</tspan><tspan class="dot">:</tspan><tspan class="dot">................................</tspan><tspan class="val">github.com/cbabil</tspan></text>
-  <text x="340" y="115"><tspan class="key">Uptime</tspan><tspan class="dot">:</tspan><tspan class="dot">....................</tspan><tspan class="val">12 years, 2 months, 28 days</tspan></text>
+  <text x="340" y="115"><tspan class="key">Uptime</tspan><tspan class="dot">:</tspan><tspan class="dot">....................</tspan><tspan class="val">12 years, 2 months, 29 days</tspan></text>
 
   <text x="340" y="145" class="dot">───────────────────────────────────────────────────────</text>
 
   <!-- GitHub Stats -->
-  <text x="340" y="170"><tspan class="key">Repos</tspan><tspan class="dot">:</tspan><tspan class="dot">..............................................</tspan><tspan class="val">14</tspan></text>
-  <text x="340" y="190"><tspan class="key">Commits</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">342</tspan></text>
+  <text x="340" y="170"><tspan class="key">Repos</tspan><tspan class="dot">:</tspan><tspan class="dot">..............................................</tspan><tspan class="val">15</tspan></text>
+  <text x="340" y="190"><tspan class="key">Commits</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">360</tspan></text>
   <text x="340" y="210"><tspan class="key">Stars</tspan><tspan class="dot">:</tspan><tspan class="dot">...............................................</tspan><tspan class="val">1</tspan></text>
   <text x="340" y="230"><tspan class="key">Followers</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">1</tspan></text>
 
   <text x="340" y="260" class="dot">───────────────────────────────────────────────────────</text>
 
   <!-- More GitHub Stats -->
-  <text x="340" y="285"><tspan class="key">PRs</tspan><tspan class="dot">:</tspan><tspan class="dot">................................................</tspan><tspan class="val">67</tspan></text>
+  <text x="340" y="285"><tspan class="key">PRs</tspan><tspan class="dot">:</tspan><tspan class="dot">................................................</tspan><tspan class="val">88</tspan></text>
   <text x="340" y="305"><tspan class="key">Issues</tspan><tspan class="dot">:</tspan><tspan class="dot">..............................................</tspan><tspan class="val">2</tspan></text>
   <text x="340" y="325"><tspan class="key">Following</tspan><tspan class="dot">:</tspan><tspan class="dot">...........................................</tspan><tspan class="val">2</tspan></text>
 
