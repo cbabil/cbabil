@@ -46,7 +46,7 @@
   <!-- System Info -->
   <text x="340" y="75"><tspan class="key">OS</tspan><tspan class="dot">:</tspan><tspan class="dot">.............................................</tspan><tspan class="val">GitHub</tspan></text>
   <text x="340" y="95"><tspan class="key">Host</tspan><tspan class="dot">:</tspan><tspan class="dot">................................</tspan><tspan class="val">github.com/cbabil</tspan></text>
-  <text x="340" y="115"><tspan class="key">Uptime</tspan><tspan class="dot">:</tspan><tspan class="dot">.....................</tspan><tspan class="val">12 years, 3 months, 6 days</tspan></text>
+  <text x="340" y="115"><tspan class="key">Uptime</tspan><tspan class="dot">:</tspan><tspan class="dot">....................</tspan><tspan class="val">12 years, 3 months, 13 days</tspan></text>
 
   <text x="340" y="145" class="dot">───────────────────────────────────────────────────────</text>
 
